@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+ </head>
+ <body>
+     <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>EMPLOYEE EDIT PAGE</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" th:action="@{/employee/update}" th:object="${employee}">
+					ID : <input type="text" th:field="*{empId}" class="form-control" readOnly>
+                    NAME : <input type="text" th:field="*{empName}" class="form-control">
+                     GENDER: 
+                    <input type="radio" th:field="*{empGen}" value="Male"/> Male
+                    <input type="radio" th:field="*{empGen}" value="Female"/> Female <br/>
+                    EMAIL : <input type="text" th:field="*{empMail}" class="form-control">
+                    SAL  : <input type="text" th:field="*{empSal}" class="form-control">
+                    DEPT : <select th:field="*{empDept}" class="form-control">
+                            <option value="">-SELECT-</option>
+                            <option value="DEV">DEV</option>
+                            <option value="QA">QA</option>
+                            <option value="BA">BA</option>
+                          </select>
+                    DOJ : <input type="date" th:field="*{empDoj}" class="form-control"/>  
+                    <button type="submit" class="btn btn-success" > UPDATE </button>
+                  </form>
+            </div>
+        </div>
+     </div>
+  
+ </body>
+</html>

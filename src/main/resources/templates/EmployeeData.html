@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+          <h3>EMPLOYEE REGISTER PAGE</h3>
+        </div>
+        <div class="card-body">
+          <a th:href="@{/employee/excel}" class="btn btn-success">EXCEL EXPORT</a> | <a th:href="@{/employee/pdf}" class="btn btn-warning">PDF EXPORT</a>
+          <table class="table table-hover">
+            <tr class="bg-info text-white">
+              <th>#</th>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>GENDER</th>
+              <th>MAIL</th>
+              <th>SAL</th>
+              <th>HRA/TA</th>
+              <th>DEPT</th>
+              <th>DOJ</th>
+              <th>OPERATION</th>
+            </tr>
+            <tr th:each="ob:${list}">
+              <td><img th:src="${ob.empImgPath}" width="50" height="60"/></td>
+              <td>[[${ob.empId}]]</td>
+              <td>[[${ob.empName}]]</td>
+              <td>[[${ob.empGen}]]</td>
+              <td>[[${ob.empMail}]]</td>
+              <td>[[${ob.empSal}]]</td>
+              <td>[[${ob.empHra +'/'+ ob.empTa }]]</td>
+              <td>[[${ob.empDept}]]</td>
+              <td>[[${ob.empDoj}]]</td>
+              <td>
+                <a th:href="@{/employee/remove(id=${ob.empId})}" class="btn btn-danger">DELETE</a> |
+                <a th:href="@{/employee/edit(id=${ob.empId})}" class="btn btn-warning">EDIT</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="card-footer bg-info text-white" th:if="${message!=null}" >
+            <b>[[${message}]]</b>
+        </div>
+      </div>
+      <hr/>
+      <nav aria-label="Page navigation example">
+  		<ul class="pagination justify-content-center">
+  		    <li class="page-item" th:if="${!page.isFirst()}">
+    			<a class="page-link" th:href="@{/employee/all(page=0)}">First</a>
+    		</li>
+    		<li class="page-item" th:if="${page.hasPrevious()}">
+    			<a class="page-link" th:href="@{/employee/all(page=${page.getNumber()-1})}">Previous</a>
+    		</li>
+
+			<th:block th:each="i:${#numbers.sequence(0,page.getTotalPages()-1)}">
+			  <th:block th:if="${i==page.getNumber()}">
+    			<li class="page-item active">
+    				<a class="page-link" th:href="@{/employee/all(page=${i})}">[[${i+1}]]</a>
+    			</li>
+			  </th:block>
+			  <th:block th:if="${i!=page.getNumber()}">
+    			<li class="page-item">
+    				<a class="page-link" th:href="@{/employee/all(page=${i})}">[[${i+1}]]</a>
+    			</li>
+			 </th:block>
+			</th:block>
+    		
+    		<li class="page-item" th:if="${page.hasNext()}">
+    			<a class="page-link" th:href="@{/employee/all(page=${page.getNumber()+1})}">Next</a>
+			</li>
+			<li class="page-item" th:if="${!page.isLast()}">
+    			<a class="page-link" th:href="@{/employee/all(page=${page.getTotalPages()-1})}">Last</a>
+			</li>
+ 		 </ul>
+	  </nav>
+    </div>
+  </body>
+</html>

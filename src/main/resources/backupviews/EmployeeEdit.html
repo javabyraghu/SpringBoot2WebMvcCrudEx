@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>Document</title>
+ </head>
+ <body>
+  <h3>EMPLOYEE REGISTER PAGE</h3>
+  <form method="post" th:action="@{/employee/update}" th:object="${employee}">
+  <pre>
+    ID   : <input type="text" th:field="*{empId}" readonly>
+	NAME : <input type="text" th:field="*{empName}">
+	SAL  : <input type="text" th:field="*{empSal}">
+	DEPT : <select th:field="*{empDept}">
+			<option value="">-SELECT-</option>
+			<option value="DEV">DEV</option>
+			<option value="QA">QA</option>
+			<option value="BA">BA</option>
+		  </select>
+	<button type="submit" > Update </button>
+	</pre>	
+  </form>
+ </body>
+</html>
